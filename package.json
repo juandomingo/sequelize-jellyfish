@@ -1,0 +1,15 @@
+{
+  "name": "DB2",
+  "version": "1.0.1",
+  "dependencies": {
+    "body-parser": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "jade": "latest",
+    "mysql": "^2.10.2",
+    "sequelize": "latest",
+    "socket.io": "latest",
+    "socketio": "latest",
+    "socketio-file-upload": "^0.4.6"
+  }
+}
