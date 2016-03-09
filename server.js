@@ -52,16 +52,25 @@ app.get('/', function(req, res) {
 	res.render('index.ejs');
 });
 
-app.get('/:hash', function(req, res) {
-	console.log('hash');
-	db.getFilesInHash('pepe');
+app.get(/^[\w]+$/, function(req, res) {
+	hashname = req.url.substring(1,req.url.length);
+	//console.log(hashname);
+	db.getFilesInHash(hashname);
 	//res.render('index.ejs');
 });
 
 
+var path = require('path');
 
-app.get(/\/\w+\@\w+/, function(req, res) {
-	//res.render('index.ejs');
+app.get(/\w+\@\w+/, function(req, res) {
+	hashname = req.url.substring(1,req.url.length);
+	arr = hashname.split("@");
+	console.log(arr);
+	//console.log(__dirname);
+	//res.sendFile(__dirname, '/file/asd/asd.txt');
+	res.setHeader("Content-disposition","attachment;filename=" + arr[0]);
+	res.sendFile(path.join(__dirname, '/files/'+ arr[1] +'/'+arr[0]));
+
 });
 
 server.listen(3000, function(){
