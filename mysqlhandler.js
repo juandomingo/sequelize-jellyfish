@@ -35,13 +35,6 @@ module.exports = function() {
 				freezeTableName: true // Model tableName will be the same as the model name
 			});
 		
-		//User.findOne().then(function(user){ console.log(user.firstName); });
-
-
-
-
-		
-
 	var saveFile = function(file){
 
 		File.sync().then(function () {
@@ -54,12 +47,23 @@ module.exports = function() {
 		  });
 		}).then(function (file) {
     		console.log(file.firstName);
-		});
-		
+		});	
 	}
 
+ 
+ 	var getFilesInHash = function ( hash ){
+
+ 		File.findAll({ where: { 'hashName' : hash}}).then( function(files){
+ 			for (var i = 0; i < files.length; i++) {
+ 				console.log(files[i].fileName);
+ 			}
+
+ 		}
+ 	)};
+
 	var handler = {
-	  "saveFile" : function(file){saveFile(file);}
+	  "saveFile" : function(file){saveFile(file);},
+	  "getFilesInHash" : function(hash){ getFilesInHash(hash);}
 	}
 
 	return handler;

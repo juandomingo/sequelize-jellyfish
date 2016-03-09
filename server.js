@@ -23,32 +23,22 @@ app.use(bodyParser()); // get information from html forms
 
 var _defaultdir = "./files/";
 var handleClient = function(socket){
-	var uploader = new siofu();
-	
-    
+
+	var uploader = new siofu();  
     uploader.listen(socket);
     uploader.on("start",function(event){
-
-
 		var dir = _defaultdir + event.file.meta.hash;
-
 		if (!fs.existsSync(dir)){
     		fs.mkdirSync(dir);
 		}
-
-    	console.log("asdasdasd");
     	uploader.dir = _defaultdir + event.file.meta.hash;
-    	console.log(uploader.dir),
-    	console.log(event.file.meta.hash);
-
-
     });
     
     uploader.on("saved",function(event){
-
     	db.saveFile(event.file);
     });
-}
+
+};
 io.sockets.on('connection', handleClient);
 
 
@@ -62,9 +52,16 @@ app.get('/', function(req, res) {
 	res.render('index.ejs');
 });
 
+app.get('/:hash', function(req, res) {
+	console.log('hash');
+	db.getFilesInHash('pepe');
+	//res.render('index.ejs');
+});
+
+
 
 app.get(/\/\w+\@\w+/, function(req, res) {
-	res.render('index.ejs');
+	//res.render('index.ejs');
 });
 
 server.listen(3000, function(){
