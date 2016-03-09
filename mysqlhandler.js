@@ -59,8 +59,7 @@ module.exports = function() {
 	}
 
 	var handler = {
-	  "saveFile" : function(file){saveFile(file);},
-	  "reset" : function(file){reset();}
+	  "saveFile" : function(file){saveFile(file);}
 	}
 
 	return handler;
