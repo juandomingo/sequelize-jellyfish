@@ -28,9 +28,7 @@ var handleClient = function(socket){
     uploader.listen(socket);
 
     uploader.on("saved",function(event){
-    	console.log(event.file.base);
-    	console.log(event.file.meta);
-
+    	db.saveFile(event.file);
     });
 }
 io.sockets.on('connection', handleClient);
