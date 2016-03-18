@@ -2,8 +2,10 @@ module.exports = function() {
 
 
 		var Sequelize = require('sequelize');
-		var sequelize = new Sequelize('db2', 'db2', 'db2', {
-		  host: 'localhost',
+
+
+		var sequelize = new Sequelize('db2', 'dbdos', 'dbdos', {
+		  host: '192.168.1.139',
 		  dialect: 'mysql',
 
 		  pool: {
@@ -36,7 +38,7 @@ module.exports = function() {
 			});
 		
 	var saveFile = function(file){
-
+		console.log(file);
 		File.sync().then(function () {
 		  // Table created
 		  return File.create({
@@ -51,19 +53,19 @@ module.exports = function() {
 	}
 
  
- 	var getFilesInHash = function ( hash ){
+ 	var getFilesInHash = function ( hash, callback ){
 
  		File.findAll({ where: { 'hashName' : hash}}).then( function(files){
  			for (var i = 0; i < files.length; i++) {
  				console.log(files[i].fileName);
  			}
-
+ 			callback(files);
  		}
  	)};
 
 	var handler = {
 	  "saveFile" : function(file){saveFile(file);},
-	  "getFilesInHash" : function(hash){ getFilesInHash(hash);}
+	  "getFilesInHash" : function(hash, callback){ getFilesInHash(hash, callback);}
 	}
 
 	return handler;

@@ -31,7 +31,7 @@ var handleClient = function(socket){
 		if (!fs.existsSync(dir)){
     		fs.mkdirSync(dir);
 		}
-    	uploader.dir = _defaultdir + event.file.meta.hash;
+    	uploader.dir =dir;
     });
     
     uploader.on("saved",function(event){
@@ -49,15 +49,11 @@ io.sockets.on('connection', handleClient);
 
 // show the home page (will also have our login links)
 app.get('/', function(req, res) {
-	res.render('index.ejs');
+	res.render('index.ejs',  { "files" : null} );
 });
 
-app.get(/^[\w]+$/, function(req, res) {
-	hashname = req.url.substring(1,req.url.length);
-	//console.log(hashname);
-	db.getFilesInHash(hashname);
-	//res.render('index.ejs');
-});
+
+
 
 
 var path = require('path');
@@ -65,7 +61,8 @@ var path = require('path');
 app.get(/\w+\@\w+/, function(req, res) {
 	hashname = req.url.substring(1,req.url.length);
 	arr = hashname.split("@");
-	console.log(arr);
+	//console.log(arr);
+	console.log("A  RE LOCOOOOOOOOOOO");
 	//console.log(__dirname);
 	//res.sendFile(__dirname, '/file/asd/asd.txt');
 	res.setHeader("Content-disposition","attachment;filename=" + arr[0]);
@@ -73,6 +70,21 @@ app.get(/\w+\@\w+/, function(req, res) {
 
 });
 
+app.get(/[\w]+/, function(req, res) {
+	var hashname = req.url.substring(1,req.url.length);
+	console.log(hashname);
+	controller.getFilesInHash(hashname, function(files){
+		res.render('index.ejs', { "files" : files} );
+
+
+	});
+
+	
+	//console.log(hashname);
+	//db.getFilesInHash(hashname);
+	//res.render('index.ejs');
+});
+
 server.listen(3000, function(){
-  	console.log("Listen on port 80\n");
+  	console.log("Listen on port 3000\n");
 });
