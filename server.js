@@ -49,7 +49,7 @@ io.sockets.on('connection', handleClient);
 
 // show the home page (will also have our login links)
 app.get('/', function(req, res) {
-	res.render('index.ejs',  { "files" : null} );
+	res.render('index.ejs',  { "files" : null, "hide_header" : false} );
 });
 
 
@@ -74,7 +74,7 @@ app.get(/[\w]+/, function(req, res) {
 	var hashname = req.url.substring(1,req.url.length);
 	console.log(hashname);
 	controller.getFilesInHash(hashname, function(files){
-		res.render('index.ejs', { "files" : files} );
+		res.render('index.ejs', { "files" : files, "hide_header" : true} );
 
 
 	});
