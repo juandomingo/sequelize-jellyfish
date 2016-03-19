@@ -19,9 +19,15 @@
     $(document).ready(function(){
      
       $("#search_button").click(function(){
-              
-              window.location.href = document.getElementById('search').value;            
-          }); 
+             window.location.href = document.getElementById('search').value;          
+      });
+
+     $("#search").keypress(function(e) {
+        if(e.which == 13) {
+            //alert('You pressed enter!');
+            window.location.href = document.getElementById('search').value;    
+        }
+      }); 
     });
         
     </script>
@@ -47,9 +53,9 @@
             
             <div class="navbar-form navbar-left" role="search">
               <div class="form-group">
-                <input type="text" class="form-control" id="search" placeholder="Search">
+                <input type="text" class="form-control" id="search" placeholder="Hash">
               </div>
-              <button type="submit" class="btn btn-default" id="search_button"> Submit </button>
+              <button type="submit" class="btn btn-default" id="search_button"> Find </button>
             </div>
             
           </div><!-- /.navbar-collapse -->

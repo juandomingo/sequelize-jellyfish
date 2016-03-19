@@ -5,7 +5,7 @@ module.exports = function() {
 
 
 		var sequelize = new Sequelize('db2', 'dbdos', 'dbdos', {
-		  host: '192.168.1.139',
+		  host: 'localhost',
 		  dialect: 'mysql',
 
 		  pool: {
