@@ -62,7 +62,7 @@ app.get(/\w+\@\w+/, function(req, res) {
 	hashname = req.url.substring(1,req.url.length);
 	arr = hashname.split("@");
 	//console.log(arr);
-	console.log("A  RE LOCOOOOOOOOOOO");
+	
 	//console.log(__dirname);
 	//res.sendFile(__dirname, '/file/asd/asd.txt');
 	res.setHeader("Content-disposition","attachment;filename=" + arr[0]);

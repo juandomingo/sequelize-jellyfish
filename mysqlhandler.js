@@ -48,7 +48,7 @@ module.exports = function() {
 			filePath: file.pathName
 		  });
 		}).then(function (file) {
-    		console.log(file.firstName);
+    		//console.log(file.firstName);
 		});	
 	}
 
@@ -56,10 +56,7 @@ module.exports = function() {
  	var getFilesInHash = function ( hash, callback ){
 
  		File.findAll({ where: { 'hashName' : hash}}).then( function(files){
- 			for (var i = 0; i < files.length; i++) {
- 				console.log(files[i].fileName);
- 			}
- 			callback(files);
+  			callback(files);
  		}
  	)};
 
