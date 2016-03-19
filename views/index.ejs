@@ -17,7 +17,7 @@
 
     <script type="text/javascript">  
     $(document).ready(function(){
-     
+      $(".progress").hide();
       $("#search_button").click(function(){
              window.location.href = document.getElementById('search').value;          
       });
@@ -101,15 +101,40 @@
         	uploader.listenOnSubmit(document.getElementById("boton"),document.getElementById("siofu_input")	);
 
         	uploader.addEventListener("start",function(event){
+            $(".progress").show();
+            $("#progress").width('0%');
         		event.file.meta.hash = "holis";
         		event.file.meta.hash = $('#hash').val();
-        		event.file.meta.description = $('#description').val();})
+        		event.file.meta.description = $('#description').val();});
+
+          uploader.addEventListener("progress",function(event)
+          {
+              $("#progress").text(event.bytesLoaded / event.file.size * 100 + '%');
+              $("#progress").width(event.bytesLoaded / event.file.size +'%');
+          });
+          uploader.addEventListener("complete",function(event)
+          {
+              $("#progress").text('100%');
+              $("#progress").width('100%');
+              window.setTimeout(function(){ 
+
+                window.location.href = document.getElementById('hash').value; 
+              }, 1500);
+          });
         	  
         	$('button').click(function(){
                 return false;
             });
 
         </script>
+
+        <br><br>
+        <div class="progress">
+          
+          <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+           60%
+          </div>
+        </div>
       <% } %>
       
 
